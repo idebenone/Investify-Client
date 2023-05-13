@@ -1,1 +1,84 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@100;200;300;400;500;600;700&family=Overpass:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+/* @import '~@angular/material/prebuilt-themes/indigo-pink.css'; */
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+:root {
+    --background: #EBEBEB;
+    --primary: #062527;
+    --light: #CDD3D4;
+}
+
+body {
+    overflow-x: hidden;
+    height: 100vh;
+    font-family: 'Kanit', sans-serif;
+    font-family: 'Overpass', sans-serif;
+    scroll-behavior: smooth;
+
+}
+
+p {
+    margin-bottom: 0rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+nav {
+    background-color: var(--primary);
+    padding: 0.75rem 2rem;
+    border-radius: 10px;
+}
+
+input {
+    border: none;
+    background-color: var(--light);
+    padding: 0.75rem;
+}
+
+button {
+    border: none;
+}
+
+input:focus,
+button:focus {
+    outline: none;
+}
+
+
+/*=======GLOBAL CLASSES=========*/
+.prmBtn {
+    padding: 0.75rem;
+    background-color: var(--primary);
+    color: var(--background);
+}
+
+.secBtn {
+    padding: 0.75rem;
+    background-color: var(--light);
+    color: var(--primary);
+}
+
+.tertBtn {
+    padding: 0.75rem;
+    border-radius: 10px;
+    background-color: transparent;
+    border: solid 0.5px var(--primary);
+    color: var(--primary);
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
