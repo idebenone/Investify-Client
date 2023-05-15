@@ -17,12 +17,13 @@ export class LoginComponent {
   ) { }
 
   ngOnInit() {
-    this.authService.getTokenFromStorage() ? this.router.navigateByUrl("/") : null;
+    this.authService.isTokenExist() ? this.router.navigateByUrl("/") : null;
   }
 
   submit() {
     this.authService.login(this.loginForm).subscribe((data: any) => {
       localStorage.setItem("token", data.token);
+      localStorage.setItem("email", data.email);
       this.snack.open('Login Successful', 'OK', { duration: 4000 });
       this.ngOnInit();
     })

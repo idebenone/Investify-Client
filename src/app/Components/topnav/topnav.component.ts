@@ -12,7 +12,7 @@ export class TopnavComponent {
   is_loggedIn = 0;
 
   ngOnInit() {
-    if (this.authService.getTokenFromStorage()) {
+    if (this.authService.isTokenExist()) {
       this.is_loggedIn = 1;
     }
   }

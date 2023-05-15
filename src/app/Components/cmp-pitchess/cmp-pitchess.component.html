@@ -15,18 +15,62 @@
         </span>
 
         <span class="navBtn">
-            <a>
+            <a data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Create Pitch
             </a>
         </span>
     </div>
 
-    <div class="row w-100 gap-5 ">
-        <div class="d-flex flex-row align-items-center card col-lg-2">
-            <img src="" alt="...">
-            <div class="d-flex flex-column gap-3 p-3">
-                <h1>Pitch Title</h1>
-                <p>Lorem Description ashdasd asd asdasd asdas asdas as a a asda asd</p>
+    <div class="row w-100 gap-5 " *ngFor="let e of pitches">
+        <div class="d-flex flex-row align-items-center card p-3 col-lg-2">
+            <img [src]="e.feature_img" alt="">
+            <div class="d-flex flex-row justify-content-between w-100">
+                <div class="d-flex flex-column gap-3 ">
+                    <h1>{{e.pitch_title}}</h1>
+                    <p>{{e.deck}}</p>
+                </div>
+                <div class="dropdown">
+                    <i data-bs-toggle="dropdown">.</i>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Update</a></li>
+                        <li><a class="dropdown-item" href="#">Delete</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add Pitch Details</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Pitch Title</mat-label>
+                        <input matInput [formControl]="pitchObj['pitch_title']" required>
+                        <mat-error>{{getErrorMessage(pitchObj['pitch_title'])}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Feature Video</mat-label>
+                        <input matInput [formControl]="pitchObj['feature_vid']" required>
+                        <mat-error>{{getErrorMessage(pitchObj['feature_vid'])}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Pitch Deck</mat-label>
+                        <textarea matInput [formControl]="pitchObj['deck']"></textarea>
+                        <mat-error>{{getErrorMessage(pitchObj['deck'])}}</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" [disabled]="hasFormErrors()" class="btn btn-primary" data-bs-dismiss="modal"
+                        (click)="addPitch()">Add</button>
+                </div>
             </div>
         </div>
     </div>

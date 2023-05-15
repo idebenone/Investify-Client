@@ -13,7 +13,7 @@ export class authGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean | UrlTree {
-    const userLoggedIn = this.authService.getTokenFromStorage();
+    const userLoggedIn = this.authService.isTokenExist();
 
     if (userLoggedIn) {
       return true;

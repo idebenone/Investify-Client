@@ -70,9 +70,7 @@ export class RegisterComponent implements AfterViewInit {
 
   initReg() {
 
-    this.authService.initiateReg(this.emailObj.email).subscribe(() => {
-      localStorage.setItem("email", this.emailObj.email);
-    })
+    this.authService.initiateReg(this.emailObj.email).subscribe(() => { })
   }
 
   submitOtp() {

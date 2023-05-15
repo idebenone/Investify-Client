@@ -12,6 +12,13 @@ import { MatInputModule } from '@angular/material/input';
 import { CompanyComponent } from '../Components/company/company.component';
 import { ProfileComponent } from '../Components/profile/profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from '../Guard/auth.interceptor';
+import { AuthService } from '../Services/auth.service';
+import { CompanyService } from '../Services/company.service';
+import { CmpPitchessComponent } from '../Components/cmp-pitchess/cmp-pitchess.component';
+import { CmpCampsComponent } from '../Components/cmp-camps/cmp-camps.component';
+
 
 @NgModule({
   declarations: [
@@ -19,6 +26,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     TopnavComponent,
     CompanyComponent,
     ProfileComponent,
+    CmpPitchessComponent,
+    CmpCampsComponent,
 
   ],
   imports: [
@@ -28,8 +37,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
 
+  ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    AuthService,
+    CompanyService
   ],
   exports: [
     SharedComponent

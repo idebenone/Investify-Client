@@ -1,70 +1,171 @@
-<div class="px-4 d-flex flex-column justify-content-center align-items-center mt-3">
-    <h1>Create Company Profile</h1>
-    <div class="d-flex flex-column gap-4 w-50 p-5">
-        <div class="d-flex flex-row gap-3">
-            <mat-form-field appearance="fill" class="w-100">
-                <mat-label>Company Name</mat-label>
-                <input matInput [formControl]="compObj.name" required>
-                <mat-error>{{getErrorMessage(compObj.name)}}</mat-error>
+<div class="px-4 d-flex flex-column justify-content-center align-items-center mt-5">
+    <div *ngIf="profLen !== true">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            Create
+        </button>
+    </div>
+
+    <div *ngIf="profLen === true">
+        <div class="d-flex flex-column gap-4">
+            <div class="d-flex flex-row gap-3">
+                <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>Company Name</mat-label>
+                    <input matInput [formControl]="compObj['cmp_name']" required>
+                    <mat-error>{{getErrorMessage(compObj['cmp_name'])}}</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>Company PAN</mat-label>
+                    <input matInput [formControl]="compObj['pan']" required>
+                    <mat-error>{{getErrorMessage(compObj['pan'])}}</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="d-flex flex-row gap-2">
+                <img [src]="imgUrl" alt="" style="width: 100px; height: 100px;">
+
+                <input type="file" (change)="onFileSelected($event)">
+            </div>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Bio</mat-label>
+                <textarea matInput [formControl]="compObj['bio']" required></textarea>
+                <mat-error>{{getErrorMessage(compObj['bio'])}}</mat-error>
             </mat-form-field>
 
-            <mat-form-field appearance="fill" class="w-100">
-                <mat-label>Company PAN</mat-label>
-                <input matInput [formControl]="compObj.pan" required>
-                <mat-error>{{getErrorMessage(compObj.pan)}}</mat-error>
-            </mat-form-field>
+            <div class="d-flex flex-row gap-3">
+                <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>Address</mat-label>
+                    <input matInput [formControl]="compObj['address']" required>
+                    <mat-error>{{getErrorMessage(compObj['address'])}}</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>City</mat-label>
+                    <input matInput [formControl]="compObj['city']" required>
+                    <mat-error>{{getErrorMessage(compObj['city'])}}</mat-error>
+                </mat-form-field>
+            </div>
+
+
+            <div class="d-flex flex-row gap-3">
+                <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>State</mat-label>
+                    <input matInput [formControl]="compObj['state']" required>
+                    <mat-error>{{getErrorMessage(compObj['state'])}}</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>Facebook</mat-label>
+                    <input matInput [formControl]="compObj['media_link1']" required>
+                    <mat-error>{{getErrorMessage(compObj['media_link1'])}}</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="d-flex flex-row gap-3">
+                <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>LinkedIn</mat-label>
+                    <input matInput [formControl]="compObj['media_link2']" required>
+                    <mat-error>{{getErrorMessage(compObj['media_link2'])}}</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>Twitter</mat-label>
+                    <input matInput [formControl]="compObj['media_link3']" required>
+                    <mat-error>{{getErrorMessage(compObj['media_link3'])}}</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="d-flex justify-content-center my-3">
+                <button [disabled]="hasFormErrors()" class="btn btn-success w-25" (click)="update()">Update</button>
+            </div>
         </div>
 
-        <mat-form-field appearance="fill">
-            <mat-label>Bio</mat-label>
-            <textarea matInput [formControl]="compObj.bio" required></textarea>
-            <mat-error>{{getErrorMessage(compObj.bio)}}</mat-error>
-        </mat-form-field>
+    </div>
+</div>
 
-        <div class="d-flex flex-row gap-3">
-            <mat-form-field appearance="fill" class="w-100">
-                <mat-label>Address</mat-label>
-                <input matInput [formControl]="compObj.address" required>
-                <mat-error>{{getErrorMessage(compObj.address)}}</mat-error>
-            </mat-form-field>
-
-            <mat-form-field appearance="fill" class="w-100">
-                <mat-label>City</mat-label>
-                <input matInput [formControl]="compObj.city" required>
-                <mat-error>{{getErrorMessage(compObj.city)}}</mat-error>
-            </mat-form-field>
-        </div>
+<!-- Button trigger modal -->
 
 
-        <div class="d-flex flex-row gap-3">
-            <mat-form-field appearance="fill" class="w-100">
-                <mat-label>State</mat-label>
-                <input matInput [formControl]="compObj.state" required>
-                <mat-error>{{getErrorMessage(compObj.state)}}</mat-error>
-            </mat-form-field>
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Create Company Profile</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex flex-column gap-4">
+                    <div class="d-flex flex-row gap-3">
+                        <mat-form-field appearance="fill" class="w-100">
+                            <mat-label>Company Name</mat-label>
+                            <input matInput [formControl]="compObj['cmp_name']" required>
+                            <mat-error>{{getErrorMessage(compObj['cmp_name'])}}</mat-error>
+                        </mat-form-field>
 
-            <mat-form-field appearance="fill" class="w-100">
-                <mat-label>Facebook</mat-label>
-                <input matInput [formControl]="compObj.media_link1" required>
-                <mat-error>{{getErrorMessage(compObj.media_link1)}}</mat-error>
-            </mat-form-field>
-        </div>
+                        <mat-form-field appearance="fill" class="w-100">
+                            <mat-label>Company PAN</mat-label>
+                            <input matInput [formControl]="compObj['pan']" required>
+                            <mat-error>{{getErrorMessage(compObj['pan'])}}</mat-error>
+                        </mat-form-field>
+                    </div>
 
-        <div class="d-flex flex-row gap-3">
-            <mat-form-field appearance="fill" class="w-100">
-                <mat-label>LinkedIn</mat-label>
-                <input matInput [formControl]="compObj.media_link2" required>
-                <mat-error>{{getErrorMessage(compObj.media_link2)}}</mat-error>
-            </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Bio</mat-label>
+                        <textarea matInput [formControl]="compObj['bio']" required></textarea>
+                        <mat-error>{{getErrorMessage(compObj['bio'])}}</mat-error>
+                    </mat-form-field>
 
-            <mat-form-field appearance="fill" class="w-100">
-                <mat-label>Twitter</mat-label>
-                <input matInput [formControl]="compObj.media_link3" required>
-                <mat-error>{{getErrorMessage(compObj.media_link3)}}</mat-error>
-            </mat-form-field>
-        </div>
-        <div class="d-flex justify-content-center mt-4">
-            <button [disabled]="hasFormErrors()" class="btn btn-success w-25" (click)="submit()">Create</button>
+                    <div class="d-flex flex-row gap-3">
+                        <mat-form-field appearance="fill" class="w-100">
+                            <mat-label>Address</mat-label>
+                            <input matInput [formControl]="compObj['address']" required>
+                            <mat-error>{{getErrorMessage(compObj['address'])}}</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="fill" class="w-100">
+                            <mat-label>City</mat-label>
+                            <input matInput [formControl]="compObj['city']" required>
+                            <mat-error>{{getErrorMessage(compObj['city'])}}</mat-error>
+                        </mat-form-field>
+                    </div>
+
+
+                    <div class="d-flex flex-row gap-3">
+                        <mat-form-field appearance="fill" class="w-100">
+                            <mat-label>State</mat-label>
+                            <input matInput [formControl]="compObj['state']" required>
+                            <mat-error>{{getErrorMessage(compObj['state'])}}</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="fill" class="w-100">
+                            <mat-label>Facebook</mat-label>
+                            <input matInput [formControl]="compObj['media_link1']" required>
+                            <mat-error>{{getErrorMessage(compObj['media_link1'])}}</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="d-flex flex-row gap-3">
+                        <mat-form-field appearance="fill" class="w-100">
+                            <mat-label>LinkedIn</mat-label>
+                            <input matInput [formControl]="compObj['media_link2']" required>
+                            <mat-error>{{getErrorMessage(compObj['media_link2'])}}</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="fill" class="w-100">
+                            <mat-label>Twitter</mat-label>
+                            <input matInput [formControl]="compObj['media_link3']" required>
+                            <mat-error>{{getErrorMessage(compObj['media_link3'])}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button class="btn btn-success w-25" (click)="submit()" data-bs-dismiss="modal">Create</button>
+            </div>
         </div>
     </div>
 </div>

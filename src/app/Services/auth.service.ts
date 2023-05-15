@@ -8,6 +8,11 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient) { }
 
+  isTokenRequired(url: string): boolean {
+    return !url.includes(`${baseURL}/api/auth/initiate`) && !url.includes(`${baseURL}/api/auth/verify`) && !url.includes(`${baseURL}/api/auth/login`) && !url.includes(`${baseURL}/api/auth/setpass`);
+  }
+
+
   //REGISTRATION APIS 
   initiateReg(data: any) {
     return this.httpClient.post(`${baseURL}/api/auth/initiate`, data);
@@ -26,11 +31,14 @@ export class AuthService {
     return this.httpClient.post(`${baseURL}/api/auth/login`, data);
   }
 
-  getTokenFromStorage() {
+  isTokenExist() {
     if (localStorage.getItem("token")) {
       return true;
     }
     return false;
+  }
+  getToken() {
+    return localStorage.getItem("token");
   }
 
 }
