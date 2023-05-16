@@ -6,6 +6,7 @@
 :root {
     --background: #EBEBEB;
     --primary: #062527;
+    --primary-light: #0625272d;
     --light: #CDD3D4;
 }
 
@@ -73,12 +74,16 @@ button:focus {
     color: var(--primary);
 }
 
-html,
-body {
-    height: 100%;
+.navBtn {
+    border-radius: 30px;
+    padding: 0.75rem 2rem;
+    border: solid 1px var(--light);
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
 }
 
-body {
-    margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+.navBtn:hover {
+    background-color: var(--primary-light);
+    color: var(--primary);
+    transition: 0.2s ease-in-out;
 }

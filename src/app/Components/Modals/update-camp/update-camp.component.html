@@ -1,0 +1,64 @@
+<div class="p-4">
+    <h2 mat-dialog-title>Update Camapign</h2>
+    <mat-dialog-content class="mat-typography">
+        <div class="d-flex flex-column gap-3 mt-3" style="width: 700px;">
+            <div class="d-flex flex-row gap-3">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Campaign Title</mat-label>
+                    <input matInput [formControl]="campObj['camp_title']" required>
+                    <mat-error>{{getErrorMessage(campObj['camp_title'])}}</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Pitch</mat-label>
+                    <mat-select [formControl]="campObj['pitch_id']">
+                        <mat-option *ngFor="let e of pitches" [value]="e.pitch_id">{{e.pitch_title}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="d-flex flex-row gap-3">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Start Date</mat-label>
+                    <input matInput [formControl]="campObj['start_date']" [matDatepicker]="start" required>
+                    <mat-datepicker-toggle matIconSuffix [for]="start"></mat-datepicker-toggle>
+                    <mat-datepicker #start></mat-datepicker>
+                    <mat-error>{{getErrorMessage(campObj['start_date'])}}</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>End Date</mat-label>
+                    <input matInput [formControl]="campObj['end_date']" [matDatepicker]="end" required>
+                    <mat-datepicker-toggle matIconSuffix [for]="end"></mat-datepicker-toggle>
+                    <mat-datepicker #end></mat-datepicker>
+                    <mat-error>{{getErrorMessage(campObj['end_date'])}}</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="d-flex flex-row gap-3">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Minimum Raise</mat-label>
+                    <input matInput [formControl]="campObj['min_raise']" required>
+                    <mat-error>{{getErrorMessage(campObj['min_raise'])}}</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Maximum Raise</mat-label>
+                    <input matInput [formControl]="campObj['max_raise']" required>
+                    <mat-error>{{getErrorMessage(campObj['max_raise'])}}</mat-error>
+                </mat-form-field>
+            </div>
+
+            <mat-form-field appearance="outline" class="w-50">
+                <mat-label>Target Raise</mat-label>
+                <input matInput [formControl]="campObj['target_raise']" required>
+                <mat-error>{{getErrorMessage(campObj['target_raise'])}}</mat-error>
+            </mat-form-field>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end" class="d-flex flex-row gap-3">
+        <button mat-button mat-dialog-close class="btn btn-secondary">Cancel</button>
+        <button mat-button class="btn btn-success" [disabled]="hasFormErrors()" (click)="updateCamp()">Update</button>
+    </mat-dialog-actions>
+</div>
+<!-- cdkFocusInitial -->

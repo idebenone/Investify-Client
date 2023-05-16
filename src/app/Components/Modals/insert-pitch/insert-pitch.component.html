@@ -1,0 +1,33 @@
+<div class="p-4">
+    <h2 mat-dialog-title>Create Pitch</h2>
+    <mat-dialog-content class="mat-typography">
+        <div class="d-flex flex-column gap-3 mt-3" style="width: 700px;">
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Pitch Title</mat-label>
+                <input matInput [formControl]="pitchObj['pitch_title']" required>
+                <mat-error>{{getErrorMessage(pitchObj['pitch_title'])}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Pitch Description</mat-label>
+                <input matInput [formControl]="pitchObj['pitch_desc']" required>
+                <mat-error>{{getErrorMessage(pitchObj['pitch_desc'])}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Feature Video</mat-label>
+                <input matInput [formControl]="pitchObj['feature_vid']" required>
+                <mat-error>{{getErrorMessage(pitchObj['feature_vid'])}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Pitch Deck</mat-label>
+                <textarea matInput [formControl]="pitchObj['deck']"></textarea>
+                <mat-error>{{getErrorMessage(pitchObj['deck'])}}</mat-error>
+            </mat-form-field>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end" class="d-flex flex-row gap-3">
+        <button mat-button mat-dialog-close class="btn btn-secondary">Cancel</button>
+        <button mat-button [disabled]="hasFormErrors()" class="btn btn-success" (click)="addPitch()">Create</button>
+    </mat-dialog-actions>
+</div>
+<!-- [mat-dialog-close]="true" -->
+<!-- cdkFocusInitial -->

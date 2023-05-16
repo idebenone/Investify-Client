@@ -1,115 +1,32 @@
 <div class="px-4">
     <h1 class="mt-5">Pitches</h1>
     <div class="d-flex flex-row gap-4 my-5">
-        <span class="navBtn">
-            Campaigns
-        </span>
-
-        <span class="navBtn">
-            Profile
-        </span>
-
-        <span class="navBtn" data-bs-toggle="modal" data-bs-target="#insertModal">
-            Create Pitch
-        </span>
+        <span class="navBtn" (click)="navigateByUrl('/company/campaigns')"> Campaigns</span>
+        <span class="navBtn" (click)="navigateByUrl('/company/profile')">Profile</span>
+        <span class="navBtn" (click)="addPitch()">Create Pitch</span>
     </div>
 
-    <div class="row w-100 gap-5 " *ngFor="let e of pitches">
-        <div class="d-flex flex-row align-items-center card p-3 col-lg-2">
-            <img [src]="e.feature_img" alt="">
-            <div class="d-flex flex-row justify-content-between w-100">
-                <div class="d-flex flex-column gap-3 ">
-                    <h2>{{e.pitch_title}}</h2>
-                    <p>{{e.pitch_desc}}</p>
+    <div class="row gap-5 ">
+        <div class="col-lg-2" *ngFor="let e of pitches">
+            <div class="d-flex flex-row align-items-center card p-3 ">
+                <img [src]="e.feature_img" alt="">
+                <div class="d-flex flex-row justify-content-between w-100">
+                    <div class="d-flex flex-column gap-3 ">
+                        <h2>{{e.pitch_title}}</h2>
+                        <p>{{e.pitch_desc}}</p>
+                    </div>
+                    <div class="dropdown">
+                        <i data-bs-toggle="dropdown" type="button" class="bi bi-three-dots-vertical mt-1"></i>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" (click)="updatePitch(e.pitch_id)" data-bs-toggle="modal"
+                                    data-bs-target="#updateModal">Update</a></li>
+                            <li><a class="dropdown-item" (click)="deletePitch(e.pitch_id)">Delete</a></li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="dropdown">
-                    <i data-bs-toggle="dropdown" type="button" class="bi bi-three-dots-vertical mt-1"></i>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" (click)="getPitch(e.pitch_id)" data-bs-toggle="modal"
-                                data-bs-target="#updateModal">Update</a></li>
-                        <li><a class="dropdown-item" (click)="deletePitch(e.pitch_id)">Delete</a></li>
-                    </ul>
-                </div>
-            </div>
 
-        </div>
-    </div>
-
-    <!-- Insert Pitch Modal -->
-    <div class="modal fade" id="insertModal" tabindex="-1" aria-labelledby="insertModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="insertModalLabel">Add Pitch Details</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body d-flex flex-column gap-2">
-                    <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Pitch Title</mat-label>
-                        <input matInput [formControl]="pitchObj['pitch_title']" required>
-                        <mat-error>{{getErrorMessage(pitchObj['pitch_title'])}}</mat-error>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Pitch Description</mat-label>
-                        <input matInput [formControl]="pitchObj['pitch_desc']" required>
-                        <mat-error>{{getErrorMessage(pitchObj['pitch_desc'])}}</mat-error>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Feature Video</mat-label>
-                        <input matInput [formControl]="pitchObj['feature_vid']" required>
-                        <mat-error>{{getErrorMessage(pitchObj['feature_vid'])}}</mat-error>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Pitch Deck</mat-label>
-                        <textarea matInput [formControl]="pitchObj['deck']"></textarea>
-                        <mat-error>{{getErrorMessage(pitchObj['deck'])}}</mat-error>
-                    </mat-form-field>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" [disabled]="hasFormErrors()" class="btn btn-primary" data-bs-dismiss="modal"
-                        (click)="addPitch()">Add</button>
-                </div>
             </div>
         </div>
     </div>
 
-    <!-- Update Pitch Modal -->
-    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updatetModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="updateModalLabel">Update Pitch Details</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body d-flex flex-column gap-2">
-                    <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Pitch Title</mat-label>
-                        <input matInput [formControl]="pitchObj['pitch_title']" required>
-                        <mat-error>{{getErrorMessage(pitchObj['pitch_title'])}}</mat-error>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Pitch Description</mat-label>
-                        <input matInput [formControl]="pitchObj['pitch_desc']" required>
-                        <mat-error>{{getErrorMessage(pitchObj['pitch_desc'])}}</mat-error>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Feature Video</mat-label>
-                        <input matInput [formControl]="pitchObj['feature_vid']" required>
-                        <mat-error>{{getErrorMessage(pitchObj['feature_vid'])}}</mat-error>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Pitch Deck</mat-label>
-                        <textarea matInput [formControl]="pitchObj['deck']"></textarea>
-                        <mat-error>{{getErrorMessage(pitchObj['deck'])}}</mat-error>
-                    </mat-form-field>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" [disabled]="hasFormErrors()" class="btn btn-primary" data-bs-dismiss="modal"
-                        (click)="updatePitch()">Update</button>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>

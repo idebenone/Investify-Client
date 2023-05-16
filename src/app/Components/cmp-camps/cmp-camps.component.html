@@ -1,1 +1,28 @@
-<p>cmp-camps works!</p>
+<div class="px-4">
+    <h1 class="mt-5">Campaigns</h1>
+    <div class="d-flex flex-row gap-4 my-5">
+        <span class="navBtn" (click)="navigateByUrl('/company/pitches')">Pitches</span>
+        <span class="navBtn" (click)="navigateByUrl('/company/profile')">Profile</span>
+        <span class="navBtn" mat-button (click)="insertCamp()">Create Campaign</span>
+    </div>
+
+    <div class="row w-100 gap-5 ">
+        <div class="d-flex flex-row align-items-center card p-3 col-lg-2">
+            <img [src]="" alt="">
+            <div class="d-flex flex-row justify-content-between w-100" *ngFor="let e of campaigns">
+                <div class="d-flex flex-column gap-3 ">
+                    <h2>{{e.camp_title}}</h2>
+                    <p>{{e.start_date}}</p>
+                </div>
+                <div class="dropdown">
+                    <i data-bs-toggle="dropdown" type="button" class="bi bi-three-dots-vertical mt-1"></i>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" (click)="updateCamp(e.camp_id)">Update</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
