@@ -1,1 +1,54 @@
-<p>forgetpass works!</p>
+<div class="d-flex flex-row">
+    <div class=""><img src="../../../assets/log.png" alt="" style="object-fit:fill;aspect-ratio: 8/9; height: 100vh;">
+    </div>
+    <div class="w-100">
+        <div class="d-flex justify-content-center align-items-center h-100" *ngIf="isSetPageNum(1)">
+            <form action="" class="d-flex flex-column gap-3 w-50" (ngSubmit)="forgetPass()">
+                <h1 class="text-center my-3">Don't worry it happens to the best of us</h1>
+                <input type="email" placeholder="Email" [(ngModel)]="emailObj.email" name="email">
+                <button class="prmBtn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Continue</button>
+                <small class="text-center">Remember everything? <a routerLink="/login">Login</a></small>
+            </form>
+        </div>
+
+        <div class="d-flex justify-content-center align-items-center h-100" *ngIf="isSetPageNum(2)">
+            <form action="" class="d-flex flex-column gap-3 w-50" (ngSubmit)="submitPass()">
+                <h1 class="text-center my-3">Set your new password</h1>
+                <input type="password" placeholder="New Password" [(ngModel)]="pass.pass" name="pass">
+                <input type="password" placeholder="Confirm Password" [(ngModel)]="pass.cfpass" name="cfpass">
+                <button class="prmBtn">Continue</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Enter 6 Digit OTP</h1>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex flex-row gap-2 justify-content-center">
+                    <input type="text" maxlength="1" class="otpIp" [(ngModel)]="otp[0]"
+                        (ngModelChange)="onInputChange(0)" #otpInput>
+                    <input type="text" maxlength="1" class="otpIp" [(ngModel)]="otp[1]"
+                        (ngModelChange)="onInputChange(1)" #otpInput>
+                    <input type="text" maxlength="1" class="otpIp" [(ngModel)]="otp[2]"
+                        (ngModelChange)="onInputChange(2)" #otpInput>
+                    <input type="text" maxlength="1" class="otpIp" [(ngModel)]="otp[3]"
+                        (ngModelChange)="onInputChange(3)" #otpInput>
+                    <input type="text" maxlength="1" class="otpIp" [(ngModel)]="otp[4]"
+                        (ngModelChange)="onInputChange(4)" #otpInput>
+                    <input type="text" maxlength="1" class="otpIp" [(ngModel)]="otp[5]"
+                        (ngModelChange)="onInputChange(5)" #otpInput>
+                </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="submitOtp()"
+                    [disabled]="isOtpIncomplete()">Verfiy</button>
+            </div>
+        </div>
+    </div>
+</div>

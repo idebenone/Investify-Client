@@ -27,6 +27,9 @@ import { InsertCampComponent } from '../Components/Modals/insert-camp/insert-cam
 import { InsertPitchComponent } from '../Components/Modals/insert-pitch/insert-pitch.component';
 import { UpdatePitchComponent } from '../Components/Modals/update-pitch/update-pitch.component';
 import { UpdateCampComponent } from '../Components/Modals/update-camp/update-camp.component';
+import { AllcampsComponent } from '../Components/allcamps/allcamps.component';
+import { IndiCampComponent } from '../Components/indi-camp/indi-camp.component';
+import { CallPaymentComponent } from '../Components/Modals/call-payment/call-payment.component';
 
 
 
@@ -41,7 +44,10 @@ import { UpdateCampComponent } from '../Components/Modals/update-camp/update-cam
     InsertCampComponent,
     InsertPitchComponent,
     UpdatePitchComponent,
-    UpdateCampComponent
+    UpdateCampComponent,
+    AllcampsComponent,
+    IndiCampComponent,
+    CallPaymentComponent,
 
   ],
   imports: [

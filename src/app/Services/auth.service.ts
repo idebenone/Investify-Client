@@ -9,9 +9,8 @@ export class AuthService {
   constructor(private httpClient: HttpClient) { }
 
   isTokenRequired(url: string): boolean {
-    return !url.includes(`${baseURL}/api/auth/initiate`) && !url.includes(`${baseURL}/api/auth/verify`) && !url.includes(`${baseURL}/api/auth/login`) && !url.includes(`${baseURL}/api/auth/setpass`);
+    return !url.includes(`${baseURL}/api/auth/initiate`) && !url.includes(`${baseURL}/api/auth/verify`) && !url.includes(`${baseURL}/api/auth/login`) && !url.includes(`${baseURL}/api/auth/setpass`) && !url.includes(`${baseURL}/api/auth/forget`);
   }
-
 
   //REGISTRATION APIS 
   initiateReg(data: any) {
@@ -25,6 +24,11 @@ export class AuthService {
   setPass(data: any) {
     return this.httpClient.post(`${baseURL}/api/auth/setpass`, data);
   }
+
+  forgetPass(data: any) {
+    return this.httpClient.post(`${baseURL}/api/auth/forget`, data);
+  }
+
 
   //LOGIN APIS
   login(data: any) {

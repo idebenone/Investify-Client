@@ -1,6 +1,7 @@
 <div class="d-flex flex-row">
-    <div class="w-50"><img src="../../../assets/log.png" alt="" style="object-fit: contain;"></div>
-    <div class="w-50">
+    <div class=""><img src="../../../assets/log.png" alt="" style="object-fit:fill;aspect-ratio: 8/9; height: 100vh;">
+    </div>
+    <div class="w-100">
         <div class="d-flex justify-content-center align-items-center h-100">
             <form action="" class="d-flex flex-column gap-3 w-50" (submit)="submit()">
                 <h1 class="text-center my-3">Sign in to continue</h1>
@@ -8,7 +9,7 @@
                 <input type="password" placeholder="Password" name="password" [(ngModel)]="loginForm.password">
                 <div class="d-flex justify-content-between">
                     <small class="d-flex align-items-center gap-2"><input type="checkbox">Remember Me</small>
-                    <small><a href="">Forgot Password?</a></small>
+                    <small><a routerLink="/forgetpass">Forgot Password?</a></small>
                 </div>
                 <button class="prmBtn">Sign In</button>
                 <small class="text-center">Are you new mate? <a routerLink="/register">Register</a></small>

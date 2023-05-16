@@ -13,9 +13,9 @@ export class CompanyComponent {
 
   //new profile 
   compObj: { [key: string]: FormControl } = {
-    cmp_id: new FormControl('', [Validators.required]),
-    cmp_name: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z ]*')]),
-    prf_img: new FormControl('', [Validators.required]),
+    cmp_id: new FormControl(''),
+    cmp_name: new FormControl('', [Validators.required]),
+    prf_img: new FormControl(''),
     pan: new FormControl('', [Validators.required]),
     bio: new FormControl('', [Validators.required]),
     address: new FormControl('', [Validators.required]),

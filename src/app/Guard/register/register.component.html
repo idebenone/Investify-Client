@@ -1,6 +1,7 @@
 <div class="d-flex flex-row h-100">
-    <div style="background-color: #062527;" class="w-50"></div>
-    <div class="w-50">
+    <div><img src="../../../assets/log.png" alt="" style="object-fit:fill;aspect-ratio: 8/9; height: 100vh;">
+    </div>
+    <div class="w-100">
         <div class="d-flex justify-content-center align-items-center h-100" *ngIf="isSetPageNum(1)">
             <form action="" class="d-flex flex-column gap-3 w-50" (ngSubmit)="initReg()">
                 <h1 class="text-center my-3">Verify yourself</h1>
@@ -18,7 +19,6 @@
                 <button class="prmBtn">Continue</button>
             </form>
         </div>
-
     </div>
 </div>
 
@@ -45,9 +45,9 @@
                         (ngModelChange)="onInputChange(5)" #otpInput>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-bs-dismiss="modal"
-                    (click)="submitOtp()">Verfiy</button>
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="submitOtp()"
+                    [disabled]="isOtpIncomplete()">Verfiy</button>
             </div>
         </div>
     </div>

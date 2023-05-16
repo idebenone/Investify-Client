@@ -54,6 +54,11 @@ export class RegisterComponent implements AfterViewInit {
     }
   }
 
+  isOtpIncomplete(): boolean {
+    return this.otp.some(value => value === '');
+  }
+
+
   setPageNum(page: any) {
     if (this.pageNum !== page) {
       this.pageNum = page;
@@ -69,8 +74,7 @@ export class RegisterComponent implements AfterViewInit {
   };
 
   initReg() {
-
-    this.authService.initiateReg(this.emailObj.email).subscribe(() => { })
+    this.authService.initiateReg(this.emailObj).subscribe(() => { })
   }
 
   submitOtp() {

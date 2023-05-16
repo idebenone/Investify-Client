@@ -7,9 +7,10 @@
     </div>
 
     <div class="row gap-5 ">
-        <div class="col-lg-2" *ngFor="let e of pitches">
-            <div class="d-flex flex-row align-items-center card p-3 ">
-                <img [src]="e.feature_img" alt="">
+        <div class="col-lg-3" *ngFor="let e of pitches">
+            <div class="d-flex flex-row align-items-center gap-4 card p-3 ">
+                <img [src]="e.feature_img" alt="" style="height: 100px; width: 100px; object-fit: contain;"
+                    class="rounded-circle">
                 <div class="d-flex flex-row justify-content-between w-100">
                     <div class="d-flex flex-column gap-3 ">
                         <h2>{{e.pitch_title}}</h2>

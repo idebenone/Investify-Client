@@ -24,7 +24,7 @@ export class UpdateCampComponent {
     min_raise: new FormControl(''),
     max_raise: new FormControl(''),
     target_raise: new FormControl(''),
-    is_active: new FormControl('')
+    raised_amt: new FormControl('')
   }
 
   pitches: any = [];
@@ -67,7 +67,8 @@ export class UpdateCampComponent {
   }
 
   getCampaignById() {
-    this.campaignService.getCampByCampId(this.data.id).subscribe((data: any) => {
+    this.campaignService.getCmpCampById(this.data.id).subscribe((data: any) => {
+      console.log(data);
       for (let key in data) {
         if (data.hasOwnProperty(key)) {
           const value = data[key];
@@ -87,7 +88,6 @@ export class UpdateCampComponent {
       min_raise: this.campObj['min_raise'].value,
       max_raise: this.campObj['max_raise'].value,
       target_raise: this.campObj['target_raise'].value,
-      is_active: this.campObj['is_active'].value,
     }
 
     this.campaignService.updateCamp(updateCampObj).subscribe((data: any) => {

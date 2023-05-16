@@ -1,4 +1,4 @@
-<div class="py-4">
+<div class="">
     <nav class="d-flex flex-row justify-content-between align-items-center">
         <div>
             <span class="fs-4 text-light" routerLink="/">We-Inv</span>
@@ -24,7 +24,7 @@
                 </div>
 
                 <li *ngIf="is_loggedIn == 0" class="ms-5">
-                    <a href="" class="text-light" routerLink="/login">Log In /
+                    <a href="" class="btn btn-light" routerLink="/login">Log In /
                         Sign up
                     </a>
                 </li>
@@ -36,7 +36,7 @@
                     <ul class="dropdown-menu mt-2">
                         <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
                         <li><a class="dropdown-item" routerLink="/settings">Settings</a></li>
-                        <li><a class="dropdown-item">Logout</a></li>
+                        <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
                     </ul>
                 </div>
             </ul>

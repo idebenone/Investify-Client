@@ -12,6 +12,8 @@
                 <input matInput [formControl]="pitchObj['pitch_desc']" required>
                 <mat-error>{{getErrorMessage(pitchObj['pitch_desc'])}}</mat-error>
             </mat-form-field>
+            <label>Feature Image</label>
+            <input type="file" (change)="onFileSelected($event)">
             <mat-form-field appearance="outline" class="w-100">
                 <mat-label>Feature Video</mat-label>
                 <input matInput [formControl]="pitchObj['feature_vid']" required>

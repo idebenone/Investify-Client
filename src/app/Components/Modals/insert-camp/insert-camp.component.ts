@@ -22,7 +22,7 @@ export class InsertCampComponent {
     min_raise: new FormControl(''),
     max_raise: new FormControl(''),
     target_raise: new FormControl(''),
-    is_active: new FormControl('')
+    raised_amt: new FormControl('')
   }
 
   pitches: any = [];

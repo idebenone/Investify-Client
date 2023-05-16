@@ -6,6 +6,7 @@ import { PitchService } from 'src/app/Services/pitch.service';
 import { UserService } from 'src/app/Services/user.service';
 import { Inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CompanyService } from 'src/app/Services/company.service';
 
 @Component({
   selector: 'app-insert-pitch',
@@ -24,11 +25,15 @@ export class InsertPitchComponent {
     deck: new FormControl('', [Validators.required])
   }
 
+  selectedFiles: File[] = [];
+  imgUrl: any;
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<InsertPitchComponent>,
     private pitchService: PitchService,
     private snack: MatSnackBar,
-    private userService: UserService,) { }
+    private userService: UserService,
+    private companyService: CompanyService) { }
 
 
   ngOnInit() {
@@ -61,13 +66,25 @@ export class InsertPitchComponent {
       cmp_id: this.pitchObj['cmp_id'].value,
       pitch_title: this.pitchObj['pitch_title'].value,
       pitch_desc: this.pitchObj['pitch_desc'].value,
+      feature_img: this.imgUrl,
       feature_vid: this.pitchObj['feature_vid'].value,
       deck: this.pitchObj['deck'].value
     }
-
+    console.log(newPitchObj);
     this.pitchService.createPitch(newPitchObj).subscribe((data) => {
       this.snack.open("Successfully Added Pitch", 'OK', { duration: 4000 });
       this.dialogRef.close()
+    })
+  }
+
+  onFileSelected(event: any) {
+    this.selectedFiles = event.target.files;
+    const formData = new FormData();
+    for (const file of this.selectedFiles) {
+      formData.append('files', file, file.name);
+    }
+    this.companyService.updateProfImage(formData).subscribe((data: any) => {
+      this.imgUrl = data.image_url;
     })
   }
 }

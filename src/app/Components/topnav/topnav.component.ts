@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/Services/auth.service';
 
 @Component({
@@ -8,12 +9,21 @@ import { AuthService } from 'src/app/Services/auth.service';
 })
 export class TopnavComponent {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+    private router: Router) { }
   is_loggedIn = 0;
 
   ngOnInit() {
     if (this.authService.isTokenExist()) {
       this.is_loggedIn = 1;
+    }
+  }
+
+  logout() {
+    if (localStorage.getItem('token') || sessionStorage.getItem('token')) {
+      localStorage.removeItem('token');
+      sessionStorage.removeItem('token');
+      this.router.navigateByUrl("/login");
     }
   }
 }
