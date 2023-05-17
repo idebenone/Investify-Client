@@ -14,23 +14,29 @@
     </div>
 
     <div class="row gap-2" *ngIf="comTru">
+        <div *ngIf="pitches.length === 0"
+            class="d-flex justify-content-center align-items-center flex-column w-100 mt-5">
+            <img src="../../../assets/145.svg" alt="" style="width: 200px;">
+            <h4 class="mt-5 text-center"><strong>No Pitches Found</strong></h4>
+        </div>
 
-        <div class="border border-1" style="width: 426px;" *ngFor="let e of pitches">
-            <div class="d-flex flex-row justify-content-between w-100 p-3 ">
-                <div class="d-flex flex-column gap-3 ">
-                    <h2>{{e.pitch_title}}</h2>
-                    <p [matTooltip]="e.pitch_desc">{{e.pitch_desc | truncate : 80 }}</p>
-                </div>
-                <div class="dropdown">
-                    <i data-bs-toggle="dropdown" type="button" class="bi bi-three-dots-vertical mt-1"></i>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" (click)="updatePitch(e.pitch_id)" data-bs-toggle="modal"
-                                data-bs-target="#updateModal">Update</a></li>
-                        <li><a class="dropdown-item" (click)="deletePitch(e.pitch_id)">Delete</a></li>
-                    </ul>
+        <div *ngIf="pitches.length !== 0">
+            <div class="border border-1" style="width: 426px;" *ngFor="let e of pitches">
+                <div class="d-flex flex-row justify-content-between w-100 p-3 ">
+                    <div class="d-flex flex-column gap-3 ">
+                        <h2>{{e.pitch_title}}</h2>
+                        <p [matTooltip]="e.pitch_desc">{{e.pitch_desc | truncate : 80 }}</p>
+                    </div>
+                    <div class="dropdown">
+                        <i data-bs-toggle="dropdown" type="button" class="bi bi-three-dots-vertical mt-1"></i>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" (click)="updatePitch(e.pitch_id)" data-bs-toggle="modal"
+                                    data-bs-target="#updateModal">Update</a></li>
+                            <li><a class="dropdown-item" (click)="deletePitch(e.pitch_id)">Delete</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
 </div>

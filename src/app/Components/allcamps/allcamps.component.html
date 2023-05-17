@@ -1,6 +1,12 @@
 <div class="container" style="margin-top: 10rem;">
     <h1 class="my-5">Futuristic Startups</h1>
-    <div class="row w-100 gap-2">
+
+    <div *ngIf="campaigns.length === 0" class="d-flex justify-content-center align-items-center flex-column w-100 mt-5">
+        <img src="../../../assets/145.svg" alt="" style="width: 200px;">
+        <h4 class="mt-5 text-center"><strong>No campaigns found</strong></h4>
+    </div>
+
+    <div class="row w-100 gap-2" *ngIf="campaigns.length !== 0">
         <div class="d-flex flex-column col-lg-4" style="width: 425px;" *ngFor="let e of campaigns">
             <img [src]="e.featureImage" alt="" style="max-height: 200px; object-fit: cover;">
             <div class="d-flex flex-column gap-3 p-3 border border-1">

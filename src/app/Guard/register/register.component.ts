@@ -113,7 +113,6 @@ export class RegisterComponent implements AfterViewInit {
         this.snack.open(`OTP verified successfully`, 'OK', { duration: 4000 })
         this.setPageNum(2);
       }
-      this.snack.open(`Fetched All Subscribers`, 'OK', { duration: 4000 })
     })
   }
 
@@ -133,6 +132,8 @@ export class RegisterComponent implements AfterViewInit {
           alert("NULL");
         }
       })
+    } else {
+      this.snack.open("The Password doesnt match", "OK", { duration: 40000 });
     }
   }
 }

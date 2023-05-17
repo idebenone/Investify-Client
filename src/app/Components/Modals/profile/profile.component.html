@@ -11,7 +11,7 @@
 
                 <mat-form-field appearance="outline" class="w-100">
                     <mat-label>Email</mat-label>
-                    <input matInput [formControl]="profObj['email']" required [disabled]="true">
+                    <input matInput [formControl]="profObj['email']" required [disabled]="true" readonly>
                     <mat-error>{{getErrorMessage(profObj['email'])}}</mat-error>
                 </mat-form-field>
             </div>
