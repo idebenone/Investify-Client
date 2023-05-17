@@ -13,4 +13,12 @@ export class UserService {
   getUserById(email: any) {
     return this.httpClient.get(`${baseURL}/api/user/` + email);
   }
+
+  getUserInv(id: any) {
+    return this.httpClient.get(`${baseURL}/api/user/inv/` + id);
+  }
+
+  updateUser(data: any) {
+    return this.httpClient.put(`${baseURL}/api/user`, data);
+  }
 }

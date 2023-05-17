@@ -20,20 +20,23 @@
             <div class="d-flex flex-row gap-3">
                 <mat-form-field appearance="outline" class="w-100">
                     <mat-label>Start Date</mat-label>
-                    <input matInput [formControl]="campObj['start_date']" [matDatepicker]="start" required>
+                    <input matInput [formControl]="campObj['start_date']" [min]="today" [matDatepicker]="start"
+                        required>
                     <mat-datepicker-toggle matIconSuffix [for]="start"></mat-datepicker-toggle>
-                    <mat-datepicker #start></mat-datepicker>
-                    <mat-error>{{getErrorMessage(campObj['start_date'])}}</mat-error>
+                    <mat-datepicker [startAt]="today" #start></mat-datepicker>
+                    <mat-error>{{ getErrorMessage(campObj['start_date']) }}</mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" class="w-100">
                     <mat-label>End Date</mat-label>
-                    <input matInput [formControl]="campObj['end_date']" [matDatepicker]="end" required>
+                    <input matInput [formControl]="campObj['end_date']" [min]="today" [max]="someDate.toISOString()"
+                        [matDatepicker]="end" required>
                     <mat-datepicker-toggle matIconSuffix [for]="end"></mat-datepicker-toggle>
                     <mat-datepicker #end></mat-datepicker>
-                    <mat-error>{{getErrorMessage(campObj['end_date'])}}</mat-error>
+                    <mat-error>{{ getErrorMessage(campObj['end_date']) }}</mat-error>
                 </mat-form-field>
             </div>
+
 
             <div class="d-flex flex-row gap-3">
                 <mat-form-field appearance="outline" class="w-100">

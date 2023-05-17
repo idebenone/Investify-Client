@@ -1,31 +1,34 @@
-<div class="px-4">
+<div class="container" style="margin-top: 10rem;">
+
     <h1 class="mt-5">Pitches</h1>
     <div class="d-flex flex-row gap-4 my-5">
         <span class="navBtn" (click)="navigateByUrl('/company/campaigns')"> Campaigns</span>
-        <span class="navBtn" (click)="navigateByUrl('/company/profile')">Profile</span>
-        <span class="navBtn" (click)="addPitch()">Create Pitch</span>
+        <span class="navBtn" (click)="addCompany()" *ngIf="!comTru">Profile</span>
+        <span class="navBtn" (click)="getCompany()" *ngIf="comTru">Profile</span>
+        <button class="navBtn" (click)="addPitch()" [disabled]="!comTru">Create Pitch</button>
     </div>
 
-    <div class="row gap-5 ">
-        <div class="col-lg-3" *ngFor="let e of pitches">
-            <div class="d-flex flex-row align-items-center gap-4 card p-3 ">
-                <img [src]="e.feature_img" alt="" style="height: 100px; width: 100px; object-fit: contain;"
-                    class="rounded-circle">
-                <div class="d-flex flex-row justify-content-between w-100">
-                    <div class="d-flex flex-column gap-3 ">
-                        <h2>{{e.pitch_title}}</h2>
-                        <p>{{e.pitch_desc}}</p>
-                    </div>
-                    <div class="dropdown">
-                        <i data-bs-toggle="dropdown" type="button" class="bi bi-three-dots-vertical mt-1"></i>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" (click)="updatePitch(e.pitch_id)" data-bs-toggle="modal"
-                                    data-bs-target="#updateModal">Update</a></li>
-                            <li><a class="dropdown-item" (click)="deletePitch(e.pitch_id)">Delete</a></li>
-                        </ul>
-                    </div>
-                </div>
+    <div *ngIf="!comTru" class="d-flex justify-content-center align-items-center flex-column w-100 mt-5">
+        <img src="../../../assets/145.svg" alt="" style="width: 200px;">
+        <h4 class="mt-5 text-center"><strong>Oops ! You haven't created a <br> company profile yet</strong></h4>
+    </div>
 
+    <div class="row gap-2" *ngIf="comTru">
+
+        <div class="border border-1" style="width: 426px;" *ngFor="let e of pitches">
+            <div class="d-flex flex-row justify-content-between w-100 p-3 ">
+                <div class="d-flex flex-column gap-3 ">
+                    <h2>{{e.pitch_title}}</h2>
+                    <p [matTooltip]="e.pitch_desc">{{e.pitch_desc | truncate : 80 }}</p>
+                </div>
+                <div class="dropdown">
+                    <i data-bs-toggle="dropdown" type="button" class="bi bi-three-dots-vertical mt-1"></i>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" (click)="updatePitch(e.pitch_id)" data-bs-toggle="modal"
+                                data-bs-target="#updateModal">Update</a></li>
+                        <li><a class="dropdown-item" (click)="deletePitch(e.pitch_id)">Delete</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { CampaignService } from 'src/app/Services/campaign.service';
+import { MatDialog } from '@angular/material/dialog';
+import { CallPaymentComponent } from '../Modals/call-payment/call-payment.component';
+import { UserService } from 'src/app/Services/user.service';
 
 @Component({
   selector: 'app-indi-camp',
@@ -13,20 +16,32 @@ export class IndiCampComponent {
   campaign: any;
   embeddedVideo: SafeHtml | undefined;
 
+  userID: any
+  campaign_id: any;
+
   constructor(private campaignService: CampaignService,
+    private userService: UserService,
     private route: ActivatedRoute,
+    private dialog: MatDialog,
     private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.getCampaignById(parseInt(params['id']));
+      this.campaign_id = parseInt(params['id']);
+    })
+    this.getUser();
+  }
+
+  getUser() {
+    this.userService.getUserById(localStorage.getItem("email")).subscribe((data: any) => {
+      this.userID = data.id;
     })
   }
 
   getCampaignById(id: any) {
     this.campaignService.getCampByCampId(id).subscribe((data: any) => {
       this.campaign = data;
-      console.log(data);
       this.embedVideo(data.featureVideo);
     })
   }
@@ -56,5 +71,18 @@ export class IndiCampComponent {
     if (match && match[1])
       return match[1];
     return '';
+  }
+
+  invest() {
+    const dialogRef = this.dialog.open(CallPaymentComponent, {
+      data: {
+        user_id: this.userID,
+        camp_id: this.campaign_id
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      window.location.reload();
+    });
   }
 }

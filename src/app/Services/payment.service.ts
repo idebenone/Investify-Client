@@ -9,8 +9,13 @@ export class PaymentService {
 
   constructor(private httpClient: HttpClient) { }
 
+
+  initValidation(data: any) {
+    return this.httpClient.post(`${baseURL}/api/bank`, data);
+  }
+
   initTrans(data: any) {
-    this.httpClient.post(`${baseURL}/api/payment/trans`, data);
+    return this.httpClient.post(`${baseURL}/api/payment/trans`, data);
   }
 
 

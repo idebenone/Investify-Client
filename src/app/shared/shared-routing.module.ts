@@ -6,9 +6,9 @@ import { AllcampsComponent } from '../Components/allcamps/allcamps.component';
 import { CmpPitchessComponent } from '../Components/cmp-pitchess/cmp-pitchess.component';
 import { CmpCampsComponent } from '../Components/cmp-camps/cmp-camps.component';
 import { authGuard } from '../Guard/auth.guard';
-import { ProfileComponent } from '../Components/profile/profile.component';
 import { CompanyComponent } from '../Components/company/company.component';
 import { IndiCampComponent } from '../Components/indi-camp/indi-camp.component';
+import { PortfolioComponent } from '../Components/portfolio/portfolio.component';
 
 const routes: Routes = [
   {
@@ -19,7 +19,7 @@ const routes: Routes = [
       { path: 'company/profile', component: CompanyComponent, canActivate: [authGuard] },
       { path: 'company/pitches', component: CmpPitchessComponent, canActivate: [authGuard] },
       { path: 'company/campaigns', component: CmpCampsComponent, canActivate: [authGuard] },
-      { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
+      { path: 'portfolio', component: PortfolioComponent, canActivate: [authGuard] },
     ]
   }
 ];

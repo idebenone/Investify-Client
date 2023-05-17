@@ -2,6 +2,34 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CampaignService } from 'src/app/Services/campaign.service';
 
+interface YourObjectType {
+  address: string;
+  bio: string;
+  campaignId: number;
+  campaignTitle: string;
+  city: string;
+  companyId: number;
+  companyName: string;
+  deck: string;
+  endDate: string;
+  featureImage: string;
+  featureVideo: string;
+  isRaisedAmt: number;
+  maxRaise: number;
+  mediaLink1: string;
+  mediaLink2: string;
+  mediaLink3: string;
+  minRaise: number;
+  pan: string;
+  pitchDescription: string;
+  pitchId: number;
+  profileImage: string;
+  startDate: string;
+  state: string;
+  targetRaise: number;
+}
+
+
 @Component({
   selector: 'app-allcamps',
   templateUrl: './allcamps.component.html',
@@ -20,8 +48,31 @@ export class AllcampsComponent {
 
   getAllPublicCamps() {
     this.campaignService.getAllPublicCamps().subscribe((data: any) => {
-      this.campaigns = data;
-      console.log(data);
+
+      const today = new Date();
+      const todayYear = today.getFullYear();
+      const todayMonth = today.getMonth();
+      const todayDate = today.getDate();
+
+      const filteredObjects: YourObjectType[] = [];
+
+      data.forEach((obj: YourObjectType) => {
+        const startDate = new Date(obj.startDate);
+        const startYear = startDate.getFullYear();
+        const startMonth = startDate.getMonth();
+        const startDateValue = startDate.getDate();
+
+        if (
+          startYear === todayYear &&
+          startMonth === todayMonth &&
+          startDateValue === todayDate
+        ) {
+          filteredObjects.push(obj);
+        }
+      });
+
+      this.campaigns = filteredObjects;
+
     })
   }
 

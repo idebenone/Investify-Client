@@ -5,8 +5,14 @@
         <div class="d-flex justify-content-center align-items-center h-100" *ngIf="isSetPageNum(1)">
             <form action="" class="d-flex flex-column gap-3 w-50" (ngSubmit)="initReg()">
                 <h1 class="text-center my-3">Verify yourself</h1>
-                <input type="email" placeholder="Email" [(ngModel)]="emailObj.email" name="email">
-                <button class="prmBtn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Continue</button>
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput [formControl]="emailObj['email']">
+                    <mat-error>{{getErrorMessage(emailObj['email'])}}</mat-error>
+                </mat-form-field>
+
+                <button class="prmBtn" [disabled]="hasFormErrors()" data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop">Continue</button>
                 <small class="text-center">Ohh you are in already? <a routerLink="/login">Login</a></small>
             </form>
         </div>
@@ -14,9 +20,18 @@
         <div class="d-flex justify-content-center align-items-center h-100" *ngIf="isSetPageNum(2)">
             <form action="" class="d-flex flex-column gap-3 w-50" (ngSubmit)="submitPass()">
                 <h1 class="text-center my-3">Set your password</h1>
-                <input type="password" placeholder="Password" [(ngModel)]="pass.pass" name="pass">
-                <input type="password" placeholder="Confirm Password" [(ngModel)]="pass.cfpass" name="cfpass">
-                <button class="prmBtn">Continue</button>
+                <mat-form-field appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input type="password" matInput [formControl]="checkPassObj['pass']" required>
+                    <mat-error>{{getErrorMessage(checkPassObj['pass'])}}</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Confirm Password</mat-label>
+                    <input type="password" matInput [formControl]="checkPassObj['cfpass']" required>
+                    <mat-error>{{getErrorMessage(checkPassObj['cfpass'])}}</mat-error>
+                </mat-form-field>
+                <button class="prmBtn" [disabled]="hasFormErrors1()">Continue</button>
             </form>
         </div>
     </div>

@@ -4,7 +4,7 @@
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 :root {
-    --background: #EBEBEB;
+    --background: #edeeed;
     --primary: #062527;
     --primary-light: #0625272d;
     --light: #CDD3D4;
@@ -16,7 +16,12 @@ body {
     font-family: 'Kanit', sans-serif;
     font-family: 'Overpass', sans-serif;
     scroll-behavior: smooth;
+    background-color: var(--background);
 
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
 
 p {
@@ -32,15 +37,24 @@ li {
 }
 
 nav {
-    background-color: var(--primary);
-    padding: 0.75rem 2rem;
-    border-radius: 10px;
+    background-color: var(--background);
+    padding: 1.5rem 2rem;
+    border-bottom: solid 1px var(--primary-light);
+}
+
+nav a {
+    color: var(--primary) !important;
 }
 
 input {
     border: none;
     background-color: var(--light);
     padding: 0.75rem;
+}
+
+input[type="file"] {
+    background-color: transparent;
+    padding: 0;
 }
 
 button {
@@ -58,6 +72,12 @@ button:focus {
     padding: 0.75rem;
     background-color: var(--primary);
     color: var(--background);
+}
+
+.prmBtn:disabled {
+    color: var(--primary);
+    background-color: var(--background);
+    border: solid 0.5px var(--primary-light);
 }
 
 .secBtn {

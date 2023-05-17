@@ -1,0 +1,82 @@
+<div class="p-4" style="height: 800px;">
+    <h2 mat-dialog-title>Company Profile</h2>
+    <mat-dialog-content class="mat-typography">
+        <div class="d-flex flex-column gap-3 mt-3" style="width: 700px;">
+            <div class="d-flex flex-row gap-2 align-items-center mt-2">
+                <img [src]="imgUrl" class="rounded-circle" alt="" style="width: 60px; height: 60px; object-fit: fit;">
+                <div class="d-flex flex-column gap-1">
+                    <label for="">Profile Image</label>
+                    <input type="file" (change)="onFileSelected($event)">
+                </div>
+            </div>
+
+            <div class="d-flex flex-row gap-3 mt-3">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Company Name</mat-label>
+                    <input matInput [formControl]="compObj['cmp_name']" required>
+                    <mat-error>{{getErrorMessage(compObj['cmp_name'])}}</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Company PAN</mat-label>
+                    <input matInput [formControl]="compObj['pan']" required>
+                    <mat-error>{{getErrorMessage(compObj['pan'])}}</mat-error>
+                </mat-form-field>
+            </div>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Bio</mat-label>
+                <textarea matInput [formControl]="compObj['bio']" required></textarea>
+                <mat-error>{{getErrorMessage(compObj['bio'])}}</mat-error>
+            </mat-form-field>
+
+            <div class="d-flex flex-row gap-3">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Address</mat-label>
+                    <input matInput [formControl]="compObj['address']" required>
+                    <mat-error>{{getErrorMessage(compObj['address'])}}</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>City</mat-label>
+                    <input matInput [formControl]="compObj['city']" required>
+                    <mat-error>{{getErrorMessage(compObj['city'])}}</mat-error>
+                </mat-form-field>
+            </div>
+
+
+            <div class="d-flex flex-row gap-3">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>State</mat-label>
+                    <input matInput [formControl]="compObj['state']" required>
+                    <mat-error>{{getErrorMessage(compObj['state'])}}</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Facebook</mat-label>
+                    <input matInput [formControl]="compObj['media_link1']" required>
+                    <mat-error>{{getErrorMessage(compObj['media_link1'])}}</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="d-flex flex-row gap-3">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>LinkedIn</mat-label>
+                    <input matInput [formControl]="compObj['media_link2']" required>
+                    <mat-error>{{getErrorMessage(compObj['media_link2'])}}</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Twitter</mat-label>
+                    <input matInput [formControl]="compObj['media_link3']" required>
+                    <mat-error>{{getErrorMessage(compObj['media_link3'])}}</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end" class="d-flex flex-row gap-3">
+        <button mat-button mat-dialog-close class="btn btn-secondary">Cancel</button>
+        <button [disabled]="hasFormErrors()" class="btn btn-success w-25" (click)="update()">Update</button>
+    </mat-dialog-actions>
+</div>
+<!-- cdkFocusInitial -->

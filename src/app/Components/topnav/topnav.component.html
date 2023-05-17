@@ -1,45 +1,40 @@
 <div class="">
     <nav class="d-flex flex-row justify-content-between align-items-center">
         <div>
-            <span class="fs-4 text-light" routerLink="/">We-Inv</span>
+            <span class="fs-4 " routerLink="/">We-Inv</span>
         </div>
-        <div>
-            <ul class="d-flex flex-row gap-5 align-items-center mb-0">
-                <div class="d-flex flex-row gap-5 align-items-center ">
-                    <li><a href="" class="text-light" routerLink="/campaigns">Campaigns</a></li>
+        <div class="d-flex flex-row gap-5 align-items-center mb-0">
+            <div class="d-flex flex-row gap-5 align-items-center ">
+                <a href="" routerLink="/campaigns">Campaigns</a>
 
-                    <li><a href="" class="text-light" routerLink="/portfolio">Investments</a></li>
+                <a href="" routerLink="/portfolio">Investments</a>
 
-                    <div class="dropdown mb-0">
-                        <a class="text-light dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Company
-                        </a>
-                        <ul class="dropdown-menu mt-2">
-                            <li><a class="dropdown-item" routerLink="company/profile">Profile</a></li>
-                            <li><a class="dropdown-item" routerLink="company/pitches">Pitches</a></li>
-                            <li><a class="dropdown-item" routerLink="company/campaigns">Campaigns</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <li *ngIf="is_loggedIn == 0" class="ms-5">
-                    <a href="" class="btn btn-light" routerLink="/login">Log In /
-                        Sign up
+                <div class="dropdown mb-0">
+                    <a class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Company
                     </a>
-                </li>
-
-                <div *ngIf="is_loggedIn == 1" class="dropdown">
-                    <a href="" class="dropdown-toggle text-light " type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <img src="../../../assets/placeholder.jpg" class="mx-2 rounded-circle" height="35"></a>
                     <ul class="dropdown-menu mt-2">
-                        <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
-                        <li><a class="dropdown-item" routerLink="/settings">Settings</a></li>
-                        <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+                        <li><a class="dropdown-item" routerLink="company/pitches">Pitches</a></li>
+                        <li><a class="dropdown-item" routerLink="company/campaigns">Campaigns</a></li>
                     </ul>
                 </div>
-            </ul>
+            </div>
+
+
+            <span *ngIf="is_loggedIn == 0" class="ms-5">
+                <a href="" class="btn btn-light" routerLink="/login">Log In /
+                    Sign up
+                </a>
+            </span>
+
+            <div *ngIf="is_loggedIn == 1" class="dropdown">
+                <a href="" class="dropdown-toggles " type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="../../../assets/placeholder.jpg" class="mx-2 rounded-circle" height="35"></a>
+                <ul class="dropdown-menu mt-2">
+                    <li><a class="dropdown-item" (click)="profile()">Profile</a></li>
+                    <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
 </div>

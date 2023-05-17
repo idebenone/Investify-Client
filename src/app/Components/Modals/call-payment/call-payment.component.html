@@ -1,15 +1,81 @@
 <div class="p-4">
-    <h2 mat-dialog-title>Update Pitch</h2>
-    <mat-dialog-content class="mat-typography">
-        <div class="d-flex flex-column gap-3 mt-3" style="width: 700px;">
-            Card Number
-            Expiry Date/Year
-            CVV
-            Amount
+    <h2 mat-dialog-title>Payment</h2>
+    <mat-dialog-content class="mat-typography mt-4">
+        <div class="d-flex flex-column gap-4 mt-3" style="width: 700px;">
+            <div class="d-flex flex-column gap-3">
+                <label for="">Card Number</label>
+                <div class="d-flex flex-row gap-3">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <input matInput class="one" (keyup)="onDigitInput($event)" [(ngModel)]="cardNum.first"
+                            maxlength="4" style="text-align: center;" placeholder="xxxx" required>
+                        <mat-error>{{getErrorMessage(credObj['card_number'])}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" class="w-100">
+                        <input matInput class="one" (keyup)="onDigitInput($event)" [(ngModel)]="cardNum.sec"
+                            maxlength="4" style="text-align: center;" placeholder="xxxx" required>
+                        <mat-error>{{getErrorMessage(credObj['card_number'])}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" class="w-100">
+                        <input matInput class="one" (keyup)="onDigitInput($event)" [(ngModel)]="cardNum.thir"
+                            maxlength="4" style="text-align: center;" placeholder="xxxx" required>
+                        <mat-error>{{getErrorMessage(credObj['card_number'])}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" class="w-100">
+                        <input matInput class="one" (keyup)="onDigitInput($event)" [(ngModel)]="cardNum.fo"
+                            maxlength="4" style="text-align: center;" placeholder="xxxx" required>
+                        <mat-error>{{getErrorMessage(credObj['card_number'])}}</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="d-flex flex-row gap-3 ">
+                <div class="d-flex flex-column gap-3 w-100">
+                    <label for="">Account Holder</label>
+                    <mat-form-field appearance="fill" class="w-100">
+                        <input matInput [formControl]="credObj['holder_name']" placeholder="Name" required>
+                        <mat-error>{{getErrorMessage(credObj['holder_name'])}}</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="d-flex flex-column gap-3 w-25">
+                    <label for="">Valid Thru</label>
+                    <div class="d-flex flex-row gap-1 align-items-center w-100">
+                        <mat-form-field appearance="fill" class="">
+                            <input matInput [(ngModel)]="exp_date.mm" maxlength="2" required name="mm" placeholder="MM">
+                            <mat-error>{{getErrorMessage(credObj['exp_date'])}}</mat-error>
+                        </mat-form-field>
+                        <h1>/</h1>
+                        <mat-form-field appearance="fill" class="">
+                            <input matInput [(ngModel)]="exp_date.yy" maxlength="2" required name="yy" placeholder="YY">
+                            <mat-error>{{getErrorMessage(credObj['exp_date'])}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex flex-row gap-3">
+                <div class="d-flex flex-column gap-3 w-100">
+                    <label for="">CVV</label>
+                    <mat-form-field appearance="fill" class="w-100">
+                        <input matInput [formControl]="credObj['cvv']" maxlength="3" required>
+                        <mat-error>{{getErrorMessage(credObj['cvv'])}}</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="d-flex flex-column gap-3 w-100">
+                    <label for="">Amount</label>
+                    <mat-form-field appearance="fill" class="w-100">
+                        <input matInput [formControl]="credObj['amount']" required>
+                        <mat-error>{{getErrorMessage(credObj['amount'])}}</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
         </div>
     </mat-dialog-content>
     <mat-dialog-actions align="end" class="d-flex flex-row gap-3">
         <button mat-button mat-dialog-close class="btn btn-secondary">Cancel</button>
+        <button mat-button mat-dialog-close class="btn btn-success" [disabled]="hasFormErrors()"
+            (click)="initValidation()">Invest
+            {{credObj['amount'].value | currency:'INR'}}</button>
     </mat-dialog-actions>
 </div>
 <!-- [mat-dialog-close]="true" -->

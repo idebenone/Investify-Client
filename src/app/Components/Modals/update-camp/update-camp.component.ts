@@ -28,6 +28,8 @@ export class UpdateCampComponent {
   }
 
   pitches: any = [];
+  someDate: Date;
+  today: Date = new Date();
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
@@ -35,7 +37,11 @@ export class UpdateCampComponent {
     private userService: UserService,
     private campaignService: CampaignService,
     private pitchService: PitchService,
-    private snack: MatSnackBar) { }
+    private snack: MatSnackBar) {
+    this.today = new Date();
+    this.someDate = new Date();
+    this.someDate.setDate(this.today.getDate() + 30);
+  }
 
   ngOnInit() {
     this.getCampaignById();

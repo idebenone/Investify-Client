@@ -26,12 +26,19 @@ export class InsertCampComponent {
   }
 
   pitches: any = [];
+  someDate: Date;
+  today: Date;
 
   constructor(public dialogRef: MatDialogRef<InsertCampComponent>,
     private userService: UserService,
     private campaignService: CampaignService,
     private pitchService: PitchService,
-    private snack: MatSnackBar) { }
+    private snack: MatSnackBar
+  ) {
+    this.today = new Date();
+    this.someDate = new Date();
+    this.someDate.setDate(this.today.getDate() + 30);
+  }
 
   ngOnInit() {
     this.getUserById();

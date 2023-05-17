@@ -8,6 +8,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { InsertPitchComponent } from '../Modals/insert-pitch/insert-pitch.component';
 import { UpdatePitchComponent } from '../Modals/update-pitch/update-pitch.component';
 import { Router } from '@angular/router';
+import { CreateCompProfileComponent } from '../Modals/create-comp-profile/create-comp-profile.component';
+import { CompanyProfileComponent } from '../Modals/company-profile/company-profile.component';
 
 @Component({
   selector: 'app-cmp-pitchess',
@@ -16,17 +18,10 @@ import { Router } from '@angular/router';
 })
 export class CmpPitchessComponent {
 
-  pitchObj: { [key: string]: FormControl } = {
-    pitch_id: new FormControl(''),
-    cmp_id: new FormControl(''),
-    pitch_title: new FormControl('', [Validators.required]),
-    pitch_desc: new FormControl('', [Validators.required]),
-    feature_img: new FormControl(''),
-    feature_vid: new FormControl('', [Validators.required]),
-    deck: new FormControl('', [Validators.required])
-  }
 
   pitches: any = [];
+  userID: any;
+  comTru = false;
 
   constructor(private pitchService: PitchService,
     private userService: UserService,
@@ -45,24 +40,17 @@ export class CmpPitchessComponent {
 
   getUserById() {
     this.userService.getUserById(localStorage.getItem("email")).subscribe((data: any) => {
-      this.pitchObj['cmp_id'].setValue(data.id);
+      this.userID = data.id;
       if (data.length != 0)
-        this.pitchService.getAllPitchByCmpId(data.id).subscribe((data: any) => {
-          this.pitches = data;
+        this.companyService.getCompById(data.id).subscribe((data: any) => {
+          if (data.length != 0) {
+            this.comTru = true;
+          }
         })
+      this.pitchService.getAllPitchByCmpId(data.id).subscribe((data: any) => {
+        this.pitches = data;
+      })
     })
-  }
-
-  getErrorMessage(control: FormControl) {
-    if (control.hasError('required'))
-      return 'You must enter a value';
-    if (control.hasError('pattern'))
-      return 'Not a valid name';
-    return '';
-  }
-
-  hasFormErrors() {
-    return Object.values(this.pitchObj).some(control => control.invalid || control.pending);
   }
 
   deletePitch(id: any) {
@@ -83,6 +71,26 @@ export class CmpPitchessComponent {
   updatePitch(id: any) {
     const dialogRef = this.dialog.open(UpdatePitchComponent, {
       data: { id: id }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.ngOnInit();
+    });
+  }
+
+  addCompany() {
+    const dialogRef = this.dialog.open(CreateCompProfileComponent, {
+      data: { user_id: this.userID }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.ngOnInit();
+    });
+  }
+
+  getCompany() {
+    const dialogRef = this.dialog.open(CompanyProfileComponent, {
+      data: { user_id: this.userID }
     });
 
     dialogRef.afterClosed().subscribe(result => {
