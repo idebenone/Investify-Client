@@ -15,13 +15,13 @@ export class InsertCampComponent {
 
   campObj: { [key: string]: FormControl } = {
     camp_id: new FormControl(''),
-    camp_title: new FormControl(''),
+    camp_title: new FormControl('', [Validators.required]),
     pitch_id: new FormControl(''),
-    start_date: new FormControl(''),
-    end_date: new FormControl(''),
-    min_raise: new FormControl(''),
-    max_raise: new FormControl(''),
-    target_raise: new FormControl(''),
+    start_date: new FormControl('', [Validators.required]),
+    end_date: new FormControl('', [Validators.required]),
+    min_raise: new FormControl('', [Validators.required, Validators.pattern(/^-?\d*\.?\d+$/)]),
+    max_raise: new FormControl('', [Validators.required, Validators.pattern(/^-?\d*\.?\d+$/)]),
+    target_raise: new FormControl('', [Validators.required, Validators.pattern(/^-?\d*\.?\d+$/)]),
     raised_amt: new FormControl('')
   }
 
@@ -60,7 +60,7 @@ export class InsertCampComponent {
     }
 
     if (control.hasError('pattern')) {
-      return 'Not a valid name';
+      return 'Oops! Not a valid format';
     }
     return '';
   }

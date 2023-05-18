@@ -61,7 +61,8 @@
     </mat-dialog-content>
     <mat-dialog-actions align="end" class="d-flex flex-row gap-3">
         <button mat-button mat-dialog-close class="btn btn-secondary">Cancel</button>
-        <button mat-button class="btn btn-success" [disabled]="hasFormErrors()" (click)="updateCamp()">Update</button>
+        <button [disabled]="hasFormErrors()" mat-button class="btn btn-success" [disabled]="hasFormErrors()"
+            (click)="updateCamp()">Update</button>
     </mat-dialog-actions>
 </div>
 <!-- cdkFocusInitial -->
