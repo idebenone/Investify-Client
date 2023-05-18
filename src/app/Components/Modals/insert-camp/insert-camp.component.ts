@@ -70,10 +70,13 @@ export class InsertCampComponent {
   }
 
   addCamp() {
+    const thatDate = new Date(this.campObj['start_date'].value);
+    const nextDate = new Date(thatDate);
+    nextDate.setDate(thatDate.getDate() + 1);
     const newCampObj = {
       camp_title: this.campObj['camp_title'].value,
       pitch_id: this.campObj['pitch_id'].value,
-      start_date: this.campObj['start_date'].value,
+      start_date: nextDate,
       end_date: this.campObj['end_date'].value,
       min_raise: this.campObj['min_raise'].value,
       max_raise: this.campObj['max_raise'].value,
