@@ -21,7 +21,7 @@
             </mat-form-field>
             <mat-form-field appearance="outline" class="w-100">
                 <mat-label>Pitch Deck</mat-label>
-                <textarea matInput [formControl]="pitchObj['deck']"></textarea>
+                <textarea matInput [formControl]="pitchObj['deck']" required></textarea>
                 <mat-error>{{getErrorMessage(pitchObj['deck'])}}</mat-error>
             </mat-form-field>
         </div>

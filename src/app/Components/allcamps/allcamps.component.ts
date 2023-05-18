@@ -37,14 +37,31 @@ interface YourObjectType {
 })
 export class AllcampsComponent {
 
-  campaigns: any = [];
+  lCampaigns: any = [];
+  uCampaigns: any = [];
+  pageNum: any;
 
   constructor(private campaignService: CampaignService,
     private router: Router) { }
 
   ngOnInit() {
     this.getAllPublicCamps();
+    this.setPageNum(1);
   }
+
+  setPageNum(page: any) {
+    if (this.pageNum !== page) {
+      this.pageNum = page;
+    }
+  };
+
+  isSetPageNum(page: any) {
+    if (this.pageNum == page) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   getAllPublicCamps() {
     this.campaignService.getAllPublicCamps().subscribe((data: any) => {
@@ -54,7 +71,8 @@ export class AllcampsComponent {
       const todayMonth = today.getMonth();
       const todayDate = today.getDate();
 
-      const filteredObjects: YourObjectType[] = [];
+      const liveCampaigns: YourObjectType[] = [];
+      const upcomingCampaigns: YourObjectType[] = [];
 
       data.forEach((obj: YourObjectType) => {
         const startDate = new Date(obj.startDate);
@@ -65,13 +83,16 @@ export class AllcampsComponent {
         if (
           startYear === todayYear &&
           startMonth === todayMonth &&
-          startDateValue === todayDate
+          startDateValue <= todayDate
         ) {
-          filteredObjects.push(obj);
+          liveCampaigns.push(obj);
+        } else {
+          upcomingCampaigns.push(obj);
         }
       });
 
-      this.campaigns = filteredObjects;
+      this.lCampaigns = liveCampaigns;
+      this.uCampaigns = upcomingCampaigns;
 
     })
   }

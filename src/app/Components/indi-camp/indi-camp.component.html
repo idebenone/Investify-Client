@@ -26,8 +26,11 @@
         <div class="d-flex flex-row mt-4">
             <div class="w-75" style="max-width: 800px">
                 <div [innerHTML]="embeddedVideo"></div>
-                <div class="mt-5">
-                    <div style="height: 100vh;" [outerHTML]="campaign.deck"></div>
+                <hr style="margin: 5rem 0rem;">
+                <div class="">
+                    <div class="border border-1 p-2">
+                        <div style="height: 100vh;" [outerHTML]="campaign.deck"></div>
+                    </div>
                 </div>
             </div>
 
@@ -36,7 +39,7 @@
                     <div style="position: sticky; top: 150px;">
                         <div>
                             <span>Total Goal</span>
-                            <h1>₹ {{campaign.targetRaise}}</h1>
+                            <h1>{{campaign.targetRaise | currency:'INR' | slice:0:-3}}</h1>
                         </div>
                         <hr class="my-4">
                         <div>

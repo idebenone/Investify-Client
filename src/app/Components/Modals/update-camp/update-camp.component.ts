@@ -28,8 +28,8 @@ export class UpdateCampComponent {
   }
 
   pitches: any = [];
-  someDate: Date;
   today: Date = new Date();
+  someDate: Date;
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
@@ -38,7 +38,6 @@ export class UpdateCampComponent {
     private campaignService: CampaignService,
     private pitchService: PitchService,
     private snack: MatSnackBar) {
-    this.today = new Date();
     this.someDate = new Date();
     this.someDate.setDate(this.today.getDate() + 30);
   }
@@ -85,11 +84,14 @@ export class UpdateCampComponent {
   }
 
   updateCamp() {
+    const thatDate = new Date(this.campObj['start_date'].value);
+    const nextDate = new Date(thatDate);
+    nextDate.setDate(thatDate.getDate() + 1);
     const updateCampObj = {
       camp_id: this.campObj['camp_id'].value,
       camp_title: this.campObj['camp_title'].value,
       pitch_id: this.campObj['pitch_id'].value,
-      start_date: this.campObj['start_date'].value,
+      start_date: nextDate,
       end_date: this.campObj['end_date'].value,
       min_raise: this.campObj['min_raise'].value,
       max_raise: this.campObj['max_raise'].value,

@@ -4,7 +4,7 @@
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 :root {
-    --background: #edeeed;
+    --background: #f0f3f0;
     --primary: #062527;
     --primary-light: #0625272d;
     --light: #CDD3D4;
